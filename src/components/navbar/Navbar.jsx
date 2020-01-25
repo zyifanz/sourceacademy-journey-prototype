@@ -80,7 +80,7 @@ class NavBar extends React.Component {
   render() {
     
     const logo = (
-      <Menu.Item header>
+      <Menu.Item header as={Link} to="/">
         <Icon name="code"/>
         Source Academy
       </Menu.Item>

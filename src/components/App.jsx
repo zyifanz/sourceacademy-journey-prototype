@@ -7,6 +7,7 @@ import {
 import { Responsive } from 'semantic-ui-react'
 import NavBar from './navbar/Navbar';
 import Playground from './playground/Playground';
+import Home from './Home';
 
 
 class App extends React.Component {
@@ -15,9 +16,12 @@ class App extends React.Component {
     const routesComponents = (
       <Responsive style={{ marginTop: "5vh" }}>
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route path="/playground">
             <Playground />
-          </Route>
+          </Route>          
         </Switch>
       </Responsive>
     )

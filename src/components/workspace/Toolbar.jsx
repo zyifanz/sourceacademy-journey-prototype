@@ -6,18 +6,18 @@ class Toolbar extends React.Component {
 
   render() {
     const {
-      runProgram,
       updateActiveLibs,
       updateActiveProgLang,
       activeLibs,
       activeProgLang,
       availLibs,
-      availProgLangs
+      availProgLangs,
+      runProgram
     } = this.props;
 
     return (
       <Menu color='grey' inverted style={{ borderRadius:"0px", margin:"0px" }}>
-        <Menu.Item
+        <Menu.Item 
           name='Run'
           icon='play'
           onClick={runProgram}
