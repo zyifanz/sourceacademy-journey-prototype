@@ -15,12 +15,14 @@ class Workspace extends React.Component {
     this.state = { 
       activeLibs: props.defaultLibs, 
       activeProgLang: props.defaultProgLang,
-      currentProgram: props.preloadedProg
+      currentProgram: props.preloadedProg,
+      showGrids: {userGuide: true, editor: true, toolkits: true}
     };
     this.runProgram = this.runProgram.bind(this);
     this.updateProgram = this.updateProgram.bind(this);
     this.updateActiveLibs = this.updateActiveLibs.bind(this);
     this.updateActiveProgLang = this.updateActiveProgLang.bind(this);
+    this.handleExpandClose = this.handleExpandClose.bind(this);
   }
 
   runProgram() {
@@ -29,7 +31,6 @@ class Workspace extends React.Component {
     console.log(this.state.activeLibs);
     console.log(this.state.activeProgLang);
     console.log(this.state.currentProgram);
-    this.setState({currentProgram: ""});
   }
 
   updateProgram(programString, event) {
@@ -42,6 +43,31 @@ class Workspace extends React.Component {
 
   updateActiveProgLang(progLang) {
     this.setState({activeProgLang: progLang});
+  }
+
+  handleExpandClose(name) {
+    const showGrids = this.state.showGrids;
+    showGrids[name] = !showGrids[name];
+    this.setState({showGrids: showGrids});
+  }
+
+  calcGridWith(name) {
+    const numOpen = Object.values(this.state.showGrids).filter(x => x).length
+    if (numOpen === 3) {
+      return {};
+    } else if (numOpen === 2) {
+      return {width: this.state.showGrids[name] 
+        ? this.state.showGrids["userGuide"]
+          ? name === "userGuide" 
+            ? 7
+            : 8
+          : name === "editor"
+            ? 8
+            : 7
+        : 1};
+    } else {
+      return {width: this.state.showGrids[name] ? 14 : 1};
+    }
   }
 
   render() {
@@ -70,25 +96,37 @@ class Workspace extends React.Component {
           availProgLangs={this.props.availProgLangs}
         />
         <Grid stackable columns={3} className="gridNoMargin">
-          <Grid.Column className="gridNoPadding ">
+          <Grid.Column className="gridNoPadding"
+            {...this.calcGridWith("userGuide")}>
             <ComponentResponsive
+              open={this.state.showGrids["userGuide"]}
+              gridName="userGuide"
               componentName="Instructions"
-              componentIcon="edit"
+              componentIcon="book"
               componentBody={UserGuideComponent}
+              handleExpandClose={this.handleExpandClose}
             ></ComponentResponsive> 
           </Grid.Column>
-          <Grid.Column className="gridNoPadding">
+          <Grid.Column className="gridNoPadding"
+            {...this.calcGridWith("editor")}>
             <ComponentResponsive
+              open={this.state.showGrids["editor"]}
+              gridName="editor"
               componentName="Editor"
               componentIcon="edit"
               componentBody={EditorComponent}
+              handleExpandClose={this.handleExpandClose}
             ></ComponentResponsive>
           </Grid.Column>
-          <Grid.Column className="gridNoPadding">
+          <Grid.Column className="gridNoPadding"
+            {...this.calcGridWith("toolkits")}>
             <ComponentResponsive
+              open={this.state.showGrids["toolkits"]}
+              gridName="toolkits"
               componentName="Toolkits"
               componentIcon="help"
               componentBody={ToolkitsComponent}
+              handleExpandClose={this.handleExpandClose}
             ></ComponentResponsive>
           </Grid.Column>
         </Grid>

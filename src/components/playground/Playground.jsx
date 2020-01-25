@@ -40,7 +40,6 @@ class Playground extends React.Component {
         availToolkits={availToolkits}
         preloadedProg={preloadedProg}
         userGuideContent={userGuideContent}
-        availToolkits={availToolkits}
       />
     )
   }
