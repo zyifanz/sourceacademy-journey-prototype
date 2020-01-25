@@ -4,6 +4,8 @@ import Editor from './Editor';
 import Toolkits from './Toolkits';
 import UserGuide from './UserGuide';
 import { Grid } from 'semantic-ui-react';
+import './workspace.css'
+import ComponentResponsive from './ComponentResponsive';
 
 
 class Workspace extends React.Component {
@@ -43,6 +45,19 @@ class Workspace extends React.Component {
   }
 
   render() {
+    const UserGuideComponent = (
+      <UserGuide userGuideContent={this.props.userGuideContent}></UserGuide>
+    );
+    const EditorComponent = (
+      <Editor
+        currentProgram={this.state.currentProgram}
+        updateProgram={this.updateProgram}
+      />
+    );
+    const ToolkitsComponent = (
+      <Toolkits />
+    );
+
     return (
       <div>
         <Toolbar
@@ -54,18 +69,27 @@ class Workspace extends React.Component {
           availLibs={this.props.availLibs}
           availProgLangs={this.props.availProgLangs}
         />
-        <Grid stackable columns={3}>
-          <Grid.Column style={{padding: "0px"}}>
-            <UserGuide userGuideContent={this.props.userGuideContent} />
+        <Grid stackable columns={3} className="gridNoMargin">
+          <Grid.Column className="gridNoPadding ">
+            <ComponentResponsive
+              componentName="Instructions"
+              componentIcon="edit"
+              componentBody={UserGuideComponent}
+            ></ComponentResponsive> 
           </Grid.Column>
-          <Grid.Column style={{padding: "0px"}}>
-            <Editor
-              currentProgram={this.state.currentProgram}
-              updateProgram={this.updateProgram}
-            />    
+          <Grid.Column className="gridNoPadding">
+            <ComponentResponsive
+              componentName="Editor"
+              componentIcon="edit"
+              componentBody={EditorComponent}
+            ></ComponentResponsive>
           </Grid.Column>
-          <Grid.Column style={{padding: "0px"}}>
-            <Toolkits />
+          <Grid.Column className="gridNoPadding">
+            <ComponentResponsive
+              componentName="Toolkits"
+              componentIcon="help"
+              componentBody={ToolkitsComponent}
+            ></ComponentResponsive>
           </Grid.Column>
         </Grid>
       </div>

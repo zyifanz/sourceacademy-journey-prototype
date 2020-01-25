@@ -1,0 +1,11 @@
+.ui.stackable.grid > .column:not(.row).gridNoPadding { 
+  padding: 0 !important;
+}
+
+.ui.grid.gridNoMargin {
+  margin: 0;
+}
+
+.somePadding {
+  padding: 1em;
+}

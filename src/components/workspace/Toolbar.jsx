@@ -16,7 +16,7 @@ class Toolbar extends React.Component {
     } = this.props;
 
     return (
-      <Menu color='grey' inverted style={{ borderRadius:"0px" }}>
+      <Menu color='grey' inverted style={{ borderRadius:"0px", margin:"0px" }}>
         <Menu.Item
           name='Run'
           icon='play'
