@@ -124,7 +124,7 @@ class Workspace extends React.Component {
               open={this.state.showGrids["toolkits"]}
               gridName="toolkits"
               componentName="Toolkits"
-              componentIcon="help"
+              componentIcon="cube"
               componentBody={ToolkitsComponent}
               handleExpandClose={this.handleExpandClose}
             ></ComponentResponsive>
