@@ -20,7 +20,7 @@ class Home extends React.Component {
           </Responsive>
           <Responsive {...Responsive.onlyMobile}>
             <Button.Group size="large" vertical>
-              <Button as={Link} to="/playground">Try out the Playground</Button>
+              <Button as={Link} to="/playground" style={{borderBottom: "1px solid white"}}>Try out the Playground</Button>
               <Button>Login via Luminus</Button>
             </Button.Group>
           </Responsive>
