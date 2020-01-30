@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, Icon, Dropdown } from 'semantic-ui-react';
+import EditorContext from '../../context/EditorContext';
 
 
 class EditorSettings extends React.Component {
@@ -11,22 +12,22 @@ class EditorSettings extends React.Component {
         <Menu.Item header>
             <Icon name="settings"/>
         </Menu.Item>
-        <Dropdown item text={this.props.fontSize.toString()}>
+        <Dropdown item text={this.context.editorFontSize.toString()}>
             <Dropdown.Menu>
-            {this.props.fontSizes.map(size => {
+            {this.context.availFontSizes.map(size => {
                 return (
-                <Dropdown.Item onClick={() => this.props.updateFontSize(size)} key={size}>
+                <Dropdown.Item onClick={() => this.context.changeEditorFontSize(size)} key={size}>
                     {size}
                 </Dropdown.Item>
                 );
             })}
             </Dropdown.Menu>
         </Dropdown>
-        <Dropdown item text={this.props.theme.replace("_", " ")}>
+        <Dropdown item text={this.context.editorTheme.replace("_", " ")}>
             <Dropdown.Menu>
-            {this.props.themes.map(theme => {
+            {this.context.availThemes.map(theme => {
                 return (
-                <Dropdown.Item onClick={() => this.props.updateTheme(theme)} key={theme}>
+                <Dropdown.Item onClick={() => this.context.changeEditorTheme(theme)} key={theme}>
                     {theme.replace("_", " ")}
                 </Dropdown.Item>
                 );
@@ -37,5 +38,6 @@ class EditorSettings extends React.Component {
     )
   }
 }
+EditorSettings.contextType = EditorContext;
 
 export default EditorSettings;
