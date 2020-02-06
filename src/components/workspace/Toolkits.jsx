@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, Menu, Segment } from 'semantic-ui-react'
+import { Segment } from 'semantic-ui-react'
 import ToolkitsNav from "./ToolkitsNav"
 
 class Toolkits extends Component {
